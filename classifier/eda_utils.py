@@ -7,8 +7,8 @@ from scipy.stats import norm
 
 
 
-def dist_plots(df, cols_to_plot):
-    fig,axes = plt.subplots(nrows = 10, ncols = 3, figsize = (10, 25))
+def dist_plots(df, cols_to_plot, nrows:int=10, ncols:int=3, figsize=(10, 25)):
+    fig,axes = plt.subplots(nrows = nrows, ncols = ncols, figsize = figsize)
     axes = axes.flat
 
     # enumerate interates through list and keeps count of iteration 
@@ -44,12 +44,12 @@ def dist_plots(df, cols_to_plot):
     return fig.show()
 
 
-def cor_plot(df, cols_to_plot,  method):
+def cor_plot(df, cols_to_plot, method, figsize=(25,15)):
     sns.set_style("darkgrid")
     corr_matrix = df[cols_to_plot].corr(method =  method)
     mask = np.triu(np.ones_like(corr_matrix, dtype = bool))
 
-    fig,ax = plt.subplots(figsize = (25,15))
+    fig,ax = plt.subplots(figsize = figsize)
 
     sns.heatmap(corr_matrix,
                 cmap = "coolwarm",
@@ -66,8 +66,8 @@ def cor_plot(df, cols_to_plot,  method):
     return fig.show()
 
 
-def qq_plot(df, cols_to_plot):
-    fig,axes = plt.subplots(nrows = 10, ncols = 3, figsize = (9, 25))
+def qq_plot(df, cols_to_plot, nrows:int=10, ncols:int=3, figsize=(9,25)):
+    fig,axes = plt.subplots(nrows = nrows, ncols = ncols, figsize = figsize)
     axes = axes.flat
 
     for i,col in enumerate(cols_to_plot):
@@ -91,8 +91,8 @@ def qq_plot(df, cols_to_plot):
     return fig.show()
 
 
-def normal_dist_plot(df, cols_to_plot):
-    fig,axes = plt.subplots(nrows = 10, ncols = 3, figsize = (9, 20))
+def normal_dist_plot(df, cols_to_plot, nrows:int=10, ncols:int=3, figsize=(9,20)):
+    fig,axes = plt.subplots(nrows = nrows, ncols = ncols, figsize = figsize)
     axes = axes.flat
 
     for i,col in enumerate(cols_to_plot):
