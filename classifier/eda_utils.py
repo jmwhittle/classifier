@@ -7,9 +7,10 @@ from scipy.stats import norm
 
 
 
-def dist_plots(df, cols_to_plot, nrows:int=10, ncols:int=3, figsize=(10, 25)):
-    fig,axes = plt.subplots(nrows = nrows, ncols = ncols, figsize = figsize)
+def dist_plots(df, cols_to_plot, nrows:int=10, ncols:int=3, figsize_x:int=10, figsize_y:int=25):
+    fig,axes = plt.subplots(nrows = nrows, ncols = ncols, figsize = (figsize_x, figsize_y))
     axes = axes.flat
+    naxes = nrows*ncols-1
 
     # enumerate interates through list and keeps count of iteration 
     # [(0, 'eat'), (1, 'sleep'), (2, 'repeat')] the first value returned is the count, the second is the list item
@@ -36,7 +37,7 @@ def dist_plots(df, cols_to_plot, nrows:int=10, ncols:int=3, figsize=(10, 25)):
         axes[i].tick_params(labelsize = 7)
             
             
-    fig.delaxes(axes[29])
+    fig.delaxes(axes[naxes])
     fig.suptitle("Distribution of numerical variables", fontsize = 12, fontweight = "bold", color = "darkred")
     fig.tight_layout()
     fig.subplots_adjust(top = 0.9)
@@ -44,12 +45,12 @@ def dist_plots(df, cols_to_plot, nrows:int=10, ncols:int=3, figsize=(10, 25)):
     return fig.show()
 
 
-def cor_plot(df, cols_to_plot, method, figsize=(25,15)):
+def cor_plot(df, cols_to_plot, method, figsize_x:int=25, figsize_y:int=15):
     sns.set_style("darkgrid")
     corr_matrix = df[cols_to_plot].corr(method =  method)
     mask = np.triu(np.ones_like(corr_matrix, dtype = bool))
 
-    fig,ax = plt.subplots(figsize = figsize)
+    fig,ax = plt.subplots(figsize = (figsize_x, figsize_y))
 
     sns.heatmap(corr_matrix,
                 cmap = "coolwarm",
